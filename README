@@ -1,36 +1,29 @@
-
-aryuk-folio-react
+videofy-player
 
 Live Link
-https://aryuk.netlify.app/
+https://player.videofy.0x91.eu.org/
 
 Getting Started
 To get you started you can simply clone the repository:
 
-
-    git clone https://github.com/eloraa/aryuk-folio-react
-
+    git clone https://github.com/eloraa/videofy-player
 
 and install the dependencies
 
-
     yarn
-
 
 Prerequisites
 You need git to clone the repository. You can get git from
 http://git-scm.com/
 
-A number of node.js tools is necessary to initialize and test the project. You must have node.js and its package manager (npm) installed. You can get them from  http://nodejs.org/. The tools/modules used in this project are listed in package.json and include yarn, react.
+A number of node.js tools is necessary to initialize and test the project. You must have node.js and its package manager (npm) installed. You can get them from http://nodejs.org/. The tools/modules used in this project are listed in package.json and include yarn, and vite.
 
 Run the Application
 Start development server:
 
-
-    yarn dev   
-
+    yarn dev
 
 Build for Production
 Build the Application for production:
 
-    yarn build   
+    yarn build
