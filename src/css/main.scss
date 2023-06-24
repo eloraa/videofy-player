@@ -1,0 +1,451 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+.__root {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    color: #fff;
+}
+
+a,
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+button,
+button:focus,
+button:hover,
+button:active {
+    outline: none;
+    border: none;
+    background: none;
+    color: inherit;
+}
+
+img,
+svg,
+video {
+    height: 100%;
+    width: 100%;
+}
+
+.__root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    main {
+        position: fixed;
+        inset: 0;
+
+        .top_bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            padding: 0 .8rem;
+
+            border-bottom: 1px solid hsla(0, 0%, 100%, 0.2);
+            background: transparent;
+            height: 60px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            font-size: .75rem;
+            font-weight: 500;
+
+            .title,
+            .close {
+                height: 100%;
+                display: grid;
+                place-content: center;
+                border-color: hsla(0, 0%, 100%, .5);
+                border-style: solid;
+                border-width: 0;
+            }
+
+
+            .close {
+                padding-left: 1rem;
+                border-left-width: 1px;
+            }
+
+            button {
+                cursor: pointer;
+                font-size: 0;
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        video {
+            vertical-align: middle;
+            object-fit: contain;
+        }
+
+        .video-js .vjs-time-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-js .vjs-duration,
+        .video-js .vjs-current-time {
+            min-width: 10%;
+            max-width: 20%;
+        }
+
+        .video-js .vjs-remaining-time {
+            display: none;
+        }
+
+        .video-js .vjs-current-time:last-child {
+            display: none;
+        }
+
+        .video-js {
+            font-family: inherit;
+
+            *,
+            *:hover,
+            *:focus,
+            &:hover,
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+
+            .vjs-error-display {
+                &::before {
+                    display: none;
+                }
+
+                .vjs-modal-dialog-content {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+
+
+            .vjs-big-play-button {
+                background: none;
+                border: none;
+                background: rgba(0, 0, 0, .5);
+                border-radius: 9999px;
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .vjs-control-bar {
+                border-top: 1px solid hsla(0, 0%, 100%, .2);
+                background: transparent;
+                height: 60px;
+
+                .vjs-progress-holder {
+                    height: 100%;
+                    background: hsla(0, 0%, 100%, 0);
+                    border-color: hsla(0, 0%, 100%, .5);
+                    border-style: solid;
+                    border-width: 0;
+                    border-right-width: 1px;
+                    border-left-width: 1px;
+
+                    .vjs-load-progress {
+                        background: hsla(0, 0%, 100%, .1);
+
+                        div {
+                            background: hsla(0, 0%, 100%, .1);
+                        }
+                    }
+
+                    .vjs-mouse-display {
+                        background: #404040;
+
+                        .vjs-time-tooltip {
+                            background-color: rgba(0, 0, 0, .5);
+                        }
+                    }
+
+                    .vjs-play-progress {
+                        background-color: hsla(0, 0%, 100%, .1);
+                    }
+                }
+
+            }
+        }
+    }
+
+    .preloader__ {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: white;
+        color: #000;
+
+        display: grid;
+        place-content: center;
+
+        .logo {
+            max-width: 6rem;
+
+            svg * {
+                animation: slide 200ms cubic-bezier(0.22, 0.61, 0.36, 1);
+
+                @for $i from 1 through 8 {
+                    &:nth-child(#{$i}) {
+                        animation-delay: 0.2s * ($i - 1);
+                    }
+                }
+            }
+
+
+        }
+
+        .bar {
+            height: 4px;
+            position: absolute;
+            right: 0;
+            left: 0;
+
+            .bar_,
+            ._bar {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+
+                span {
+                    height: 100%;
+                    position: absolute;
+                    width: 100%;
+                    display: inline-block;
+                    background: #8BDDD8;
+                }
+            }
+
+            .bar_ {
+                animation: primary-indeterminate-translate 2s infinite linear;
+
+                span {
+                    animation: primary-indeterminate-scale 2s infinite linear;
+                }
+            }
+
+            ._bar {
+                animation: auxiliary-indeterminate-translate 2s infinite linear;
+
+                span {
+                    animation: auxiliary-indeterminate-scale 2s infinite linear;
+                }
+            }
+        }
+    }
+}
+
+/* video js style overrides */
+.vjs-icon-play:before,
+.video-js .vjs-play-control .vjs-icon-placeholder:before,
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+    content: "";
+    display: block;
+    position: static;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 14'%3E%3Cpath d='M0.09 2.48836C0.09 4.83836 0 9.48836 0 11.7984C0 13.5184 1.08 14.3384 2.57 13.0784C4.06 11.8184 7.14 9.20836 8 8.28836C9.19 6.99836 9.16 6.13836 7.82 4.99836C6.09971 3.37463 4.28666 1.85207 2.39 0.438358C1.09 -0.441642 0.09 -0.111642 0.09 2.48836Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 50%;
+}
+
+.vjs-icon-pause:before,
+.video-js .vjs-play-control.vjs-playing .vjs-icon-placeholder:before {
+    content: "";
+    display: block;
+    position: static;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 13'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7.92569 1.00802C7.55569 1.00802 6.90569 0.938016 6.61569 1.22802C6.49155 1.36638 6.41758 1.5425 6.40569 1.72802C6.34469 2.43802 6.22469 5.73802 6.22469 6.64802C6.21869 6.96402 6.20469 7.35302 6.19069 7.77902C6.12869 9.54502 6.04469 11.938 6.41569 12.398C6.68569 12.728 7.29569 12.618 7.68569 12.618C7.9418 12.6351 8.1969 12.5722 8.41569 12.438C8.70569 12.238 8.70569 11.848 8.70569 11.548C8.74069 11.11 8.75569 10.677 8.76169 10.238C8.76169 9.92602 8.76169 9.61202 8.76169 9.28802V6.96802C8.75069 6.49802 8.74669 6.03202 8.74269 5.56802C8.75223 4.33274 8.69849 3.09779 8.58169 1.86802C8.55837 1.59271 8.43909 1.33435 8.24469 1.13802C8.1578 1.05719 8.04433 1.01095 7.92569 1.00802ZM1.06469 1.00802C0.830433 0.999788 0.600728 1.07412 0.415693 1.21802C0.338731 1.3021 0.28678 1.406 0.265693 1.51802C0.173968 2.32463 0.133886 3.13629 0.145693 3.94802C0.0756931 5.00802 0.0756931 6.00802 0.0756931 7.00802C0.00569313 7.79802 0.00569308 8.61702 0.00569308 9.44702C-0.013674 10.2451 0.0163835 11.0436 0.0956931 11.838L0.104693 11.927C0.0944218 12.1221 0.15517 12.3143 0.275693 12.468C0.602726 12.6445 0.980069 12.7044 1.34569 12.638H1.39469C1.76769 12.628 2.23069 12.618 2.34569 12.148C2.46515 11.4885 2.50544 10.8171 2.46569 10.148C2.46569 9.10802 2.42569 8.08802 2.40569 7.02802C2.39769 6.63602 2.38569 6.24402 2.37469 5.85002C2.35469 5.17902 2.33569 4.50802 2.33569 3.83802C2.31469 3.41802 2.28569 2.74702 2.25569 2.41802L2.24069 2.23302C2.25653 1.87638 2.17531 1.52213 2.00569 1.20802C1.72225 1.04047 1.39178 0.970235 1.06469 1.00802Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 50%;
+}
+
+.vjs-icon-volume-mute:before,
+.video-js .vjs-mute-control.vjs-vol-0 .vjs-icon-placeholder:before {
+    content: "";
+    display: block;
+    position: static;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 15'%3E%3Cpath d='M3.61025 3.87996C2.9496 3.78907 2.27942 3.95751 1.74025 4.34996C1.42876 4.72557 1.20151 5.16365 1.07385 5.63462C0.946185 6.10559 0.921089 6.59847 1.00025 7.07996C1.00025 7.81996 1.00025 9.37996 1.86025 9.66996C2.61295 9.80431 3.37568 9.87456 4.14025 9.87996C5.80025 10.16 5.80025 12.1 7.00025 13.23C7.21742 13.4896 7.49256 13.6945 7.80349 13.8283C8.11442 13.962 8.45242 14.0208 8.79025 14C9.58025 13.78 9.69025 12.79 9.79025 12.1C9.91025 10.33 9.92025 8.53996 9.99025 6.76996C10.0503 5.47996 10.1503 4.19996 10.1603 2.91996C10.2153 2.25181 10.1817 1.5793 10.0603 0.919964C9.75025 -0.0800355 9.00025 -0.270036 8.21025 0.379964C7.85763 0.727843 7.54868 1.11738 7.29025 1.53996C6.97641 2.04678 6.63246 2.53433 6.26025 2.99996C5.9168 3.34176 5.49867 3.59914 5.03882 3.75185C4.57897 3.90455 4.08994 3.94841 3.61025 3.87996Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 50%;
+}
+
+.vjs-icon-volume-high:before,
+.video-js .vjs-mute-control .vjs-icon-placeholder:before {
+    content: "";
+    display: block;
+    position: static;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 21'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.79265 5.53661C2.84905 5.40667 1.8918 5.64715 1.12165 6.20761C0.6766 6.74415 0.351928 7.36999 0.169576 8.04281C-0.0127766 8.71563 -0.0485597 9.41976 0.0646452 10.1076C0.0646452 11.1646 0.0646453 13.3926 1.29265 13.8076C2.36755 13.9994 3.45678 14.0998 4.54865 14.1076C5.99065 14.3506 6.55565 15.4716 7.16265 16.6746C7.51819 17.4965 8.01618 18.2491 8.63365 18.8976C8.94384 19.2685 9.33687 19.5613 9.78103 19.7524C10.2252 19.9435 10.708 20.0275 11.1906 19.9976C12.2736 19.6976 12.4616 18.3816 12.6016 17.4046L12.6186 17.2836C12.7296 15.6496 12.7746 14.0036 12.8186 12.3606C12.8436 11.4606 12.8676 10.5606 12.9036 9.67061C12.9306 9.10161 12.9626 8.53261 12.9946 7.96561C13.0656 6.69761 13.1376 5.43461 13.1466 4.17061C13.2244 3.21534 13.1753 2.25398 13.0006 1.31161C12.5576 -0.116393 11.4866 -0.388393 10.3586 0.540607C9.85534 1.03759 9.41442 1.59402 9.04565 2.19761C8.59829 2.92027 8.10808 3.61552 7.57765 4.27961C7.08712 4.76784 6.48992 5.13551 5.83311 5.35364C5.17629 5.57177 4.47779 5.6344 3.79265 5.53661ZM21.0466 6.49761C20.4934 5.31898 19.6656 4.29021 18.6326 3.49761C18.5031 3.39603 18.3408 3.3456 18.1765 3.35593C18.0122 3.36625 17.8574 3.43661 17.7416 3.55361C17.6815 3.61212 17.6337 3.68209 17.6011 3.75938C17.5685 3.83667 17.5517 3.91971 17.5517 4.00361C17.5517 4.0875 17.5685 4.17054 17.6011 4.24783C17.6337 4.32512 17.6815 4.39509 17.7416 4.45361C19.2284 6.02425 20.0569 8.10487 20.0566 10.2676C20.0414 11.338 19.7993 12.393 19.3463 13.363C18.8932 14.333 18.2397 15.1958 17.4286 15.8946C17.3173 15.9904 17.246 16.1246 17.229 16.2705C17.2121 16.4165 17.2506 16.5635 17.3371 16.6823C17.4235 16.8011 17.5514 16.883 17.6955 16.9118C17.8396 16.9406 17.9892 16.9141 18.1146 16.8376C19.2345 16.1632 20.1638 15.2143 20.8146 14.0806C21.466 12.9256 21.8295 11.6308 21.8746 10.3056C21.8947 8.98954 21.6113 7.68654 21.0466 6.49761ZM17.6596 7.41961C17.3062 6.68293 16.8103 6.02357 16.2006 5.47961C16.0866 5.38843 15.9443 5.33984 15.7983 5.34221C15.6523 5.34459 15.5117 5.39777 15.4006 5.49261C15.2591 5.58593 15.1601 5.73139 15.1253 5.89733C15.0905 6.06326 15.1226 6.23623 15.2146 6.37861C15.9202 7.41817 16.3389 8.62546 16.4286 9.87861C16.517 11.0821 16.1502 12.2749 15.4006 13.2206C15.3275 13.3307 15.2884 13.4599 15.2884 13.5921C15.2884 13.7243 15.3275 13.8535 15.4006 13.9636C15.4963 14.1023 15.6416 14.1989 15.8065 14.2336C15.9714 14.2682 16.1433 14.2381 16.2866 14.1496C16.98 13.6661 17.5241 12.9983 17.8576 12.2216C18.1736 11.443 18.3103 10.6032 18.2576 9.76461C18.2151 8.95017 18.0118 8.15219 17.6596 7.41661V7.41961Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 50%;
+}
+
+.vjs-icon-replay:before,
+.video-js .vjs-play-control.vjs-ended .vjs-icon-placeholder:before {
+    content: "";
+    display: block;
+    position: static;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 43 44'%3E%3Cpath d='M2.46322 32.7C-0.873778 25.943 -0.805778 18.35 2.57922 19.752C3.48722 20.128 3.55722 20.352 3.77922 23.53C4.55722 34.491 13.8102 41.378 24.9232 39.267C44.6002 35.533 41.2102 6.30005 21.3002 7.96305C17.9572 8.24205 17.7262 8.41705 19.5352 9.30505C23.7532 11.373 22.2132 14.105 17.5282 12.871C11.9932 11.407 9.55922 9.64605 10.3162 7.65605C11.6179 5.27356 13.1179 3.00488 14.8002 0.874048C16.8542 -1.29795 18.9002 0.924047 17.4552 3.75805L16.8762 4.89105L17.5232 4.69105C19.0312 4.21405 25.1432 4.19105 27.2322 4.65805C39.9322 7.48405 46.0462 22.258 39.2802 33.776C35.5032 40.209 28.3432 43.376 21.1912 43.376C13.5702 43.37 5.95722 39.773 2.46322 32.7ZM18.6052 29.955C18.6052 27.645 18.6952 22.995 18.6952 20.645C18.6952 18.045 19.6952 17.715 20.9952 18.595C22.892 20.0086 24.7051 21.5311 26.4252 23.155C27.7652 24.294 27.7962 25.155 26.6052 26.444C25.7452 27.364 22.6662 29.974 21.1752 31.234C20.8155 31.5864 20.344 31.8022 19.8422 31.844C19.0842 31.844 18.6062 31.1 18.6062 29.954L18.6052 29.955Z' fill='white'/%3E%3C/svg%3E%0A") no-repeat 50%;
+}
+
+.video-js .vjs-play-progress:before {
+    display: none;
+}
+
+@keyframes slide {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0)
+    }
+}
+
+@keyframes primary-indeterminate-translate {
+    0% {
+        -webkit-transform: translateX(-145.166611%);
+        -webkit-transform: translateX(-145.166611%);
+        transform: translateX(-145.166611%)
+    }
+
+    20% {
+        -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.701732, 0.495819);
+        -webkit-animation-timing-function: cubic-bezier(0.5, 0, 0.701732, 0.495819);
+        animation-timing-function: cubic-bezier(0.5, 0, 0.701732, 0.495819);
+        -webkit-transform: translateX(-145.166611%);
+        -webkit-transform: translateX(-145.166611%);
+        transform: translateX(-145.166611%)
+    }
+
+    59.15% {
+        -webkit-animation-timing-function: cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
+        -webkit-animation-timing-function: cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
+        animation-timing-function: cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
+        -webkit-transform: translateX(-61.495191%);
+        -webkit-transform: translateX(-61.495191%);
+        transform: translateX(-61.495191%)
+    }
+
+    to {
+        -webkit-transform: translateX(55.444446%);
+        -webkit-transform: translateX(55.444446%);
+        transform: translateX(55.444446%)
+    }
+}
+
+@keyframes auxiliary-indeterminate-translate {
+    0% {
+        -webkit-animation-timing-function: cubic-bezier(0.15, 0, 0.515058, 0.409685);
+        -webkit-animation-timing-function: cubic-bezier(0.15, 0, 0.515058, 0.409685);
+        animation-timing-function: cubic-bezier(0.15, 0, 0.515058, 0.409685);
+        -webkit-transform: translateX(-54.888891%);
+        -webkit-transform: translateX(-54.888891%);
+        transform: translateX(-54.888891%)
+    }
+
+    25% {
+        -webkit-animation-timing-function: cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);
+        -webkit-animation-timing-function: cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);
+        animation-timing-function: cubic-bezier(0.31033, 0.284058, 0.8, 0.733712);
+        -webkit-transform: translateX(-17.236978%);
+        -webkit-transform: translateX(-17.236978%);
+        transform: translateX(-17.236978%)
+    }
+
+    48.35% {
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0.627035, 0.6, 0.902026);
+        -webkit-animation-timing-function: cubic-bezier(0.4, 0.627035, 0.6, 0.902026);
+        animation-timing-function: cubic-bezier(0.4, 0.627035, 0.6, 0.902026);
+        -webkit-transform: translateX(29.497274%);
+        -webkit-transform: translateX(29.497274%);
+        transform: translateX(29.497274%)
+    }
+
+    to {
+        -webkit-transform: translateX(105.388891%);
+        -webkit-transform: translateX(105.388891%);
+        transform: translateX(105.388891%)
+    }
+}
+
+@keyframes primary-indeterminate-scale {
+    0% {
+        -webkit-transform: scaleX(0.08);
+        -webkit-transform: scaleX(0.08);
+        transform: scaleX(0.08)
+    }
+
+    36.65% {
+        -webkit-animation-timing-function: cubic-bezier(0.334731, 0.12482, 0.785844, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.334731, 0.12482, 0.785844, 1);
+        animation-timing-function: cubic-bezier(0.334731, 0.12482, 0.785844, 1);
+        -webkit-transform: scaleX(0.08);
+        -webkit-transform: scaleX(0.08);
+        transform: scaleX(0.08)
+    }
+
+    69.15% {
+        -webkit-animation-timing-function: cubic-bezier(0.06, 0.11, 0.6, 1);
+        -webkit-animation-timing-function: cubic-bezier(0.06, 0.11, 0.6, 1);
+        animation-timing-function: cubic-bezier(0.06, 0.11, 0.6, 1);
+        -webkit-transform: scaleX(0.661479);
+        -webkit-transform: scaleX(0.661479);
+        transform: scaleX(0.661479)
+    }
+
+    to {
+        -webkit-transform: scaleX(0.08);
+        -webkit-transform: scaleX(0.08);
+        transform: scaleX(0.08)
+    }
+}
+
+@keyframes auxiliary-indeterminate-scale {
+    0% {
+        -webkit-animation-timing-function: cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);
+        -webkit-animation-timing-function: cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);
+        animation-timing-function: cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);
+        -webkit-transform: scaleX(0.08);
+        -webkit-transform: scaleX(0.08);
+        transform: scaleX(0.08)
+    }
+
+    19.15% {
+        -webkit-animation-timing-function: cubic-bezier(0.152313, 0.196432, 0.648374, 1.004315);
+        -webkit-animation-timing-function: cubic-bezier(0.152313, 0.196432, 0.648374, 1.004315);
+        animation-timing-function: cubic-bezier(0.152313, 0.196432, 0.648374, 1.004315);
+        -webkit-transform: scaleX(0.457104);
+        -webkit-transform: scaleX(0.457104);
+        transform: scaleX(0.457104)
+    }
+
+    44.15% {
+        -webkit-animation-timing-function: cubic-bezier(0.257759, 0.003163, 0.211762, 1.38179);
+        -webkit-animation-timing-function: cubic-bezier(0.257759, 0.003163, 0.211762, 1.38179);
+        animation-timing-function: cubic-bezier(0.257759, 0.003163, 0.211762, 1.38179);
+        -webkit-transform: scaleX(0.72796);
+        -webkit-transform: scaleX(0.72796);
+        transform: scaleX(0.72796)
+    }
+
+    to {
+        -webkit-transform: scaleX(0.08);
+        -webkit-transform: scaleX(0.08);
+        transform: scaleX(0.08)
+    }
+}
